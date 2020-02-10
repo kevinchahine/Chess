@@ -1,5 +1,7 @@
 #include "BitBoard.h"
 
+using namespace std;
+
 inline bool BitBoard::isOccupied(uint8_t position) const
 {
 	register uint64_t mask = static_cast<uint64_t>(1) << position;
@@ -199,17 +201,106 @@ inline void BitBoard::moveQueen(uint8_t from, uint8_t to)
 
 	removePiece(from);
 
-	// Set 'to'bits
+	// Set 'to' bits
 	this->occupied = this->occupied | mask;	// 1 set as occupied
 	setColor(colorMask);					// c set as same color as was 'from'
-	this->b0 = (this->b0 | mask);			// 1 set as Bishop
-	this->b1 = (this->b1 & ~mask);			// 0 
-	this->b2 = (this->b2 | mask);			// 1 
+	this->b0 = (this->b0 | mask);			// 1 set as Queen
+	this->b1 = (this->b1 | mask);			// 1 
+	this->b2 = (this->b2 & ~mask);			// 0 
 }
 
 inline void BitBoard::moveKing(uint8_t from, uint8_t to)
 {
+	register uint64_t mask = static_cast<uint64_t>(1) << to;
+	register uint64_t colorMask = static_cast<uint64_t>(getColor(from)) << to;
 
+	// Are we moveing the White or Black King?
+	register uint64_t rowPos = calcRowPosition(from);
+	if (colorMask > 0) {
+		// We are moving White King
+
+		// Is one rook in corner?
+		if (isRook(0)) {
+			register const uint64_t rookMask = static_cast<uint64_t>(1) << 0;
+
+			// Yes, set as uncastleable
+			b2 = b2 & ~rookMask;
+		}
+		// How about the other one?
+		if (isRook(7)) {
+			register const uint64_t rookMask = static_cast<uint64_t>(1) << 7;
+
+			// Yes, set as uncastleable
+			b2 = b2 & ~rookMask;
+		}
+	}
+	else {
+		// We are moving Black King
+
+		// Is one rook in corner?
+		if (isRook(56)) {
+			register const uint64_t rookMask = static_cast<uint64_t>(1) << 56;
+
+			// Yes, set as uncastleable
+			b2 = b2 & ~rookMask;
+		}
+		// How about the other one?
+		if (isRook(63)) {
+			register const uint64_t rookMask = static_cast<uint64_t>(1) << 63;
+
+			// Yes, set as uncastleable
+			b2 = b2 & ~rookMask;
+		}
+	}
+
+	removePiece(from);
+	
+	// Set 'to' bits
+	this->occupied = this->occupied | mask;	// 1 set as occupied
+	setColor(colorMask);					// c set as same color as was 'from'
+	this->b0 = (this->b0 | mask);			// 1 set as King
+	this->b1 = (this->b1 | mask);			// 1 
+	this->b2 = (this->b2 | mask);			// 1 
+}
+
+inline void BitBoard::castleQueenSide(uint8_t from, uint8_t to)
+{
+	// Which castling on White or Black?
+	register const uint64_t rowPos = calcRowPosition(from);
+
+	if (rowPos == 0) {
+		// White side
+		moveRook(0, 3);
+		moveKing(4, 2);
+	}
+	else if (rowPos == 7) {
+		// Black side
+		moveRook(56, 59);
+		moveKing(60, 58);
+	}
+	else {
+		cout << "error: " << __FUNCTION__ << " from = " << from << " to = " << to << '\n';
+	}
+}
+
+inline void BitBoard::castleKingSide(uint8_t from, uint8_t to)
+{
+	// Which castling on White or Black?
+	register const uint64_t rowPos = calcRowPosition(from);
+
+	if (rowPos == 0) {
+		// White side
+		moveRook(7, 5);
+		moveKing(4, 6);
+	}
+	else if (rowPos == 7) {
+		// Black side
+		moveRook(63, 61);
+		moveKing(60, 62);
+	}
+	else {
+		cout << "error: " << __FUNCTION__ << " from = " << from << " to = " << to << '\n';
+	}
 }
 
 inline uint8_t BitBoard::calcPosition(uint8_t rowPos, uint8_t colPos)

@@ -3,7 +3,7 @@
 #include <bitset>
 using namespace std;
 
-#include "BitBoard.h"
+#include "../Chess/BitBoard.h"
 
 int main()
 {
@@ -17,8 +17,8 @@ int main()
 	cout << a1 << '\n';
 	cout << a2 << '\n';
 	cout << a1 - a2 << '\n';
-
-	cout << "Press any key to containue...\n";
+	
+	cout << "Press any key to continue...\n";
 	cin.get();
 	return 0;
 }

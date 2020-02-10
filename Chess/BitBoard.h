@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 
+#include "dll_symbols.h"
+
 // Represents chess board as a bitmap
 // | b0 | b1 | b2 |
 // +----+----+----+
@@ -38,7 +40,7 @@
 // position = rowPos * 8 + colPos
 // rowPos = position / 8
 // colPos = position % 8
-class BitBoard
+class CHESS_API BitBoard
 {
 public:
 	inline bool isOccupied(uint8_t position) const;

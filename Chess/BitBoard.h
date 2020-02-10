@@ -60,21 +60,29 @@ public:
 
 	inline void removePiece(uint8_t position);
 		   
+	inline bool getColor(uint8_t position);
+	inline void setColor(uint64_t colorMask);
 	inline void setColorToWhite(uint8_t position);
 	inline void setColorToBlack(uint8_t position);
 	
 	inline void movePawn(uint8_t from, uint8_t to);
+	inline void pushPawn(uint8_t from, uint8_t to);
 	inline void moveRook(uint8_t from, uint8_t to);
 	inline void moveNight(uint8_t from, uint8_t to);
 	inline void moveBishop(uint8_t from, uint8_t to);
 	inline void moveQueen(uint8_t from, uint8_t to);
 	inline void moveKing(uint8_t from, uint8_t to);
+	inline void castleQueenSide(uint8_t from, uint8_t to);
+	inline void castleKingSide(uint8_t from, uint8_t to);
 
 	static inline uint8_t calcPosition(uint8_t rowPos, uint8_t colPos);
 	static inline uint8_t calcRowPosition(uint8_t position);
 	static inline uint8_t calcColPosition(uint8_t position);
 
 protected:
+	static const bool WHITE = 1;
+	static const bool BLACK = 0;
+
 	const uint64_t IS_OCCUPIED_INIT = 0xFFFF'0000'0000'FFFF;
 	const uint64_t IS_WHITE_INIT = 0x0000'0000'0000'FFFF;
 	const uint64_t B0_INIT = 0x7E00'0000'0000'00E7;

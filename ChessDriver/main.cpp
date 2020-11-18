@@ -1,23 +1,28 @@
 #include <iostream>
 #include <iomanip>
 #include <bitset>
-using namespace std;
+#include <memory>
 
 #include "../Chess/BitBoard.h"
+#include "../Chess/Board.h"
+#include "../Chess/TextDisplay.h"
+
+using namespace std;
 
 int main()
 {
-	BitBoard b1;
-	BitBoard b2;
+	crunch::Board board;
 
-	uint64_t a1 = reinterpret_cast<uint64_t>(&b1);
-	uint64_t a2 = reinterpret_cast<uint64_t>(&b2);
-
-	cout << sizeof(b1) << '\n';
-	cout << a1 << '\n';
-	cout << a2 << '\n';
-	cout << a1 - a2 << '\n';
+	unique_ptr<crunch::DisplayBase> pDisplay =
+		make_unique<crunch::TextDisplay>();
 	
+	pDisplay->setLightCellColor(iocolor::LIGHTBLUE);
+	pDisplay->setDarkCellColor(iocolor::BLUE);
+	pDisplay->setLightPieceColor(iocolor::WHITE);
+	pDisplay->setDarkPieceColor(iocolor::BLACK);
+
+	pDisplay->show(board);
+
 	cout << "Press any key to continue...\n";
 	cin.get();
 	return 0;

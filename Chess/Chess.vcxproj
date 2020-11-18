@@ -23,6 +23,7 @@
     <ProjectGuid>{AE19639B-2C90-4893-86C0-83CB4CF755F8}</ProjectGuid>
     <RootNamespace>Chess</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Crunch</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -58,15 +59,19 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\code\libraries\iocolor.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\code\libraries\iocolor.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\code\libraries\iocolor.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\code\libraries\iocolor.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -129,12 +134,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BitBoard.cpp" />
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="DisplayBase.cpp" />
     <ClCompile Include="LegalMovesGenerator.cpp" />
+    <ClCompile Include="Line_Codes.cpp" />
+    <ClCompile Include="TextDisplay.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BitBoard.h" />
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="DisplayBase.h" />
     <ClInclude Include="dll_symbols.h" />
     <ClInclude Include="LegalMovesGenerator.h" />
+    <ClInclude Include="Line_Codes.h" />
+    <ClInclude Include="TextDisplay.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
